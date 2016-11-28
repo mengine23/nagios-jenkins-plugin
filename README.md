@@ -100,7 +100,7 @@ A sample nagios command using this plugin.
 ```
 define command {
   command_name    check_jenkins_job_ext
-  command_line    $USER1$/check_jenkins_job_extended.pl --jenkins_url "$ARG1$" --username "$ARG2$" --password "$ARG3$" --jobname $ARG4$ --failureThreshold $ARG5$ --buildDurThreshold $ARG6$ --lsbThresholdWarn $ARG7$ --lsbThresholdCrit $ARG8$
+  command_line    $USER1$/check_jenkins_job_extended.pl --jenkins_url "$ARG1$" --username "$ARG2$" --password "$ARG3$" --jobname "$ARG4$" --failureThreshold $ARG5$ --buildDurThreshold $ARG6$ --lsbThresholdWarn $ARG7$ --lsbThresholdCrit $ARG8$
 }
 ```
 
