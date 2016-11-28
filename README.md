@@ -75,9 +75,9 @@ A nagios plugin for which lets you check jenkins jobs according to various crite
 
 The plugin supports several options, which you can pass "0" to disable that particular threshold.
 
-Usage:  check_jenkins_job_extended url jobname concurrentFailsThreshold  buildDurationThresholdMilliseconds lastStableBuildThresholdInMinutesWarn lastStableBuildThresholdInMinutesCrit
+Usage:  check_jenkins_job_extended --jenkins_url "" --username "" --password "" --jobname "" --failureThreshold 1 --buildDurThreshold 0 --lsbThresholdWarn 0 --lsbThresholdCrit 0
 
-* url: The URL to your jenkins server
+* jenkins_url: The URL to your jenkins server
 
 * username: The username for auth to your jenkins server [optional]
 
@@ -85,13 +85,13 @@ Usage:  check_jenkins_job_extended url jobname concurrentFailsThreshold  buildDu
 
 * jobname: The name of the jenkins job you'd like to check
 
-* concurrentFailsThreshold: The number of concurrent failing builds it should CRIT alert on
+* failureThreshold: The number of concurrent failing builds it should CRIT alert on
 
-* buildDurationThresholdMilliseconds: It will alert if the last build took longer than this number of milliseconds to complete
+* buildDurThreshold: It will alert if the last build took longer than this number of milliseconds to complete
 
-* lastStableBuildThresholdInMinutesWarn: WARN if it's been this number of minutes since the last stable build
+* lsbThresholdWarn: WARN if it's been this number of minutes since the last stable build
 
-* lastStableBuildThresholdInMinutesCrit: CRIT if it's been this number of minutes since the last stable build
+* lsbThresholdCrit: CRIT if it's been this number of minutes since the last stable build
 
 ## Example
 
@@ -100,7 +100,7 @@ A sample nagios command using this plugin.
 ```
 define command {
   command_name    check_jenkins_job_ext
-  command_line    $USER1$/check_jenkins_job_extended.pl $ARG1$ $ARG2$ $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+  command_line    $USER1$/check_jenkins_job_extended.pl --jenkins_url "$ARG1$" --username "$ARG2$" --password "$ARG3$" --jobname $ARG4$ --failureThreshold $ARG5$ --buildDurThreshold $ARG6$ --lsbThresholdWarn $ARG7$ --lsbThresholdCrit $ARG8$
 }
 ```
 
@@ -113,7 +113,6 @@ define service {
   service_description             Jenkins - prod build
   check_interval                  1
   check_command                   check_jenkins_job_ext!http://buildserver.mycompany.com!prod!0!0!4!20
-  contacts						bob,bill
 }
 ```
 
